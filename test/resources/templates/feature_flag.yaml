@@ -1,0 +1,8 @@
+---
+apiVersion: cloudfoundry.io/v1beta1
+kind: FeatureFlag
+metadata:
+  name: diego_docker
+spec:
+  enabled: true
+  

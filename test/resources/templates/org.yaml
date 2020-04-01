@@ -1,0 +1,7 @@
+---
+apiVersion: cloudfoundry.io/v1beta1
+kind: Org
+metadata:
+  name: test
+spec:
+  quota: test

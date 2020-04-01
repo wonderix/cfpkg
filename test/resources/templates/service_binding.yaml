@@ -1,0 +1,10 @@
+---
+apiVersion: cloudfoundry.io/v1beta1
+kind: ServiceBinding
+metadata:
+  name: myservice-binding
+spec:
+  org: test
+  space: test
+  service_instance: myservice-instance
+  app: diego-docker-app

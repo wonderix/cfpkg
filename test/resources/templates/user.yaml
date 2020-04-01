@@ -1,0 +1,11 @@
+---
+apiVersion: uaa.io/v1beta1
+kind: User
+metadata:
+  name: {{ .Values.test_user.username }}
+spec:
+  password: {{ .Values.test_user.password }}
+  emails: 
+  - value: {{ .Values.test_user.username }}@example.com
+    primary: true
+    

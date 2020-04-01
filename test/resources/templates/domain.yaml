@@ -1,0 +1,7 @@
+---
+apiVersion: cloudfoundry.io/v1beta1
+kind: Domain
+metadata:
+spec:
+  org: test
+  domain: test.example.com

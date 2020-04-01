@@ -1,0 +1,13 @@
+---
+apiVersion: cloudfoundry.io/v1beta1
+kind: ServiceInstance
+metadata:
+  name: myservice-instance
+spec:
+  org: test
+  space: test
+  service: myservice
+  plan: shared
+  broker: broker
+  parameter: {}
+  tags: []

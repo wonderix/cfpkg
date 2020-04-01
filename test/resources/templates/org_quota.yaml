@@ -1,0 +1,17 @@
+---
+apiVersion: cloudfoundry.io/v1beta1
+kind: OrgQuota
+metadata:
+  name: test
+spec:
+  non_basic_services_allowed: true
+  total_services: 10
+  total_routes: 10
+  total_private_domains: 10
+  memory_limit: 10000
+  trial_db_allowed: true
+  instance_memory_limit: 10000
+  app_instance_limit: 10
+  app_task_limit: 10
+  total_service_keys: 10
+  total_reserved_route_ports: 10

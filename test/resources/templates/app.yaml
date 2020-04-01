@@ -1,0 +1,24 @@
+---
+apiVersion: cloudfoundry.io/v1beta1
+kind: App
+metadata:
+  name: diego-docker-app
+spec:
+  org: test
+  space: test
+  url: 
+  memory: 
+  instances: 1
+  disk_quota:
+  state: STARTED
+  command:
+  buildpack:
+  health_check_http_endpoint:
+  health_check_type:
+  diego: false
+  enable_ssh: false
+  docker_image: cloudfoundry/diego-docker-app
+  docker_credentials: {}
+  environment_json: {}
+  ports: []
+  

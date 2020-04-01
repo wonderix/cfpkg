@@ -1,0 +1,7 @@
+config = chart("config")
+config.apply(k8s)
+print(k8s.get("secret","password").data.value)
+print(config.simple.value)
+print(config.password.value)
+print(config.boolean.value)
+print(config.selection.value)

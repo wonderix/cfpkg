@@ -1,0 +1,12 @@
+---
+apiVersion: cloudfoundry.io/v1beta1
+kind: Route
+metadata:
+  name: route
+spec:
+  org: test
+  space: test
+  domain: test.example.com
+  host: test
+  port:
+  path:

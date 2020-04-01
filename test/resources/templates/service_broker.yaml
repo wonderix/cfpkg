@@ -1,0 +1,11 @@
+---
+apiVersion: cloudfoundry.io/v1beta1
+kind: ServiceBroker
+metadata:
+  name: broker
+spec:
+  # org: test
+  # space: test
+  broker_url: http://worlds-simplest-service-broker.default.svc.cluster.local:3000
+  auth_username: broker
+  auth_password: broker

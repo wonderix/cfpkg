@@ -1,0 +1,10 @@
+---
+apiVersion: cloudfoundry.io/v1beta1
+kind: Buildpack
+metadata:
+  name: javabuildpack
+spec:
+  url: https://github.com/cloudfoundry/java-buildpack/releases/download/v4.28/java-buildpack-v4.28.zip
+  enabled: true
+  locked: false
+  position: 1

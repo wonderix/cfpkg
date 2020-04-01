@@ -1,0 +1,10 @@
+---
+apiVersion: cloudfoundry.io/v1beta1
+kind: ServiceAccess
+metadata:
+  name: broker-access
+spec:
+  service: myservice
+  broker: broker
+  enabled: true
+  plan: shared

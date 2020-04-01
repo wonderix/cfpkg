@@ -1,0 +1,9 @@
+---
+apiVersion: uaa.io/v1beta1
+kind: Member
+metadata:
+  name: {{ .Values.test_user.username }}
+spec:
+  member: {{ .Values.test_user.username }}
+  group: cloud_controller.read
+  type: USER

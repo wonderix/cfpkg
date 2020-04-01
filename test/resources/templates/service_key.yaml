@@ -1,0 +1,10 @@
+---
+apiVersion: cloudfoundry.io/v1beta1
+kind: ServiceKey
+metadata:
+  name: myservice-key
+spec:
+  org: test
+  space: test
+  service_instance: myservice-instance
+  parameters: {}

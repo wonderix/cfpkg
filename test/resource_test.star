@@ -1,0 +1,5 @@
+resources = chart("resources")
+resources.apply(k8s)
+resources.apply(k8s)
+resources.delete(k8s)
+resources.delete(k8s)

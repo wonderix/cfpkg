@@ -1,0 +1,5 @@
+---
+apiVersion: cloudfoundry.io/v1beta1
+kind: SharedDomain
+spec:
+  domain: shared.example.com
