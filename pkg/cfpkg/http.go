@@ -8,7 +8,7 @@ import (
 	"path"
 	"time"
 
-	"github.com/kramerul/shalm/pkg/shalm"
+	"github.com/wonderix/shalm/pkg/shalm"
 )
 
 var httpClient = &http.Client{Timeout: time.Second * 60}

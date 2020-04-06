@@ -3,7 +3,7 @@ package cfpkg
 import (
 	"encoding/json"
 
-	"github.com/kramerul/shalm/pkg/shalm"
+	"github.com/wonderix/shalm/pkg/shalm"
 )
 
 type domainResource struct{}

@@ -5,7 +5,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/kramerul/shalm/pkg/shalm"
+	"github.com/wonderix/shalm/pkg/shalm"
 )
 
 type serviceAccessSpec struct {

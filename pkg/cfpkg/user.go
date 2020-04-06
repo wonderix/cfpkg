@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 
 	"github.com/cloudfoundry-community/go-uaa"
-	"github.com/kramerul/shalm/pkg/shalm"
+	"github.com/wonderix/shalm/pkg/shalm"
 )
 
 type userSpec struct {

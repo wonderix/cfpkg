@@ -45,12 +45,15 @@ vet:
 
 cfpkg :: bin/cfpkg
 
-VERSION_FLAGS := "-X github.com/kramerul/cfpkg/pkg/cfpkg.version=${VERSION}"
+VERSION_FLAGS := "-X github.com/wonderix/cfpkg/pkg/cfpkg.version=${VERSION}"
 
 bin/cfpkg: $(GO_FILES) go.sum
 	mkdir -p bin
 	CGO_ENABLED=0 GOARCH=amd64 GO111MODULE=on go build -ldflags ${VERSION_FLAGS} -o bin/cfpkg . 
 
+bin/linux/cfpkg: $(GO_FILES) go.sum
+	mkdir -p bin/linux
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=on go build -ldflags ${VERSION_FLAGS} -o bin/linux/cfpkg . 
 
 binaries:
 	mkdir -p bin

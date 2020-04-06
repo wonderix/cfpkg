@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/url"
 
-	"github.com/kramerul/shalm/pkg/shalm"
+	"github.com/wonderix/shalm/pkg/shalm"
 )
 
 type serviceBindingSpec struct {

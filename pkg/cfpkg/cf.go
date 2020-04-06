@@ -9,7 +9,7 @@ import (
 	"github.com/blang/semver"
 	"github.com/cloudfoundry-community/go-cfclient"
 	"github.com/cloudfoundry-community/go-uaa"
-	"github.com/kramerul/shalm/pkg/shalm"
+	"github.com/wonderix/shalm/pkg/shalm"
 )
 
 type resource interface {
@@ -121,6 +121,16 @@ func (c *CF) ForSubChart(namespace string, app string, version semver.Version) s
 // Inspect -
 func (c *CF) Inspect() string {
 	return c.k8s.Inspect()
+}
+
+// Host -
+func (c *CF) Host() string {
+	return c.k8s.Host()
+}
+
+// SetTool -
+func (c *CF) SetTool(tool shalm.Tool) {
+	c.k8s.SetTool(tool)
 }
 
 // Watch -

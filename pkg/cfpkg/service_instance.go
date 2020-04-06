@@ -6,7 +6,7 @@ import (
 	"fmt"
 
 	"github.com/cloudfoundry-community/go-cfclient"
-	"github.com/kramerul/shalm/pkg/shalm"
+	"github.com/wonderix/shalm/pkg/shalm"
 )
 
 type serviceInstanceSpec struct {

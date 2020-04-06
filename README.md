@@ -2,12 +2,12 @@
 
 Install Cloud Foundry artifacts the kubernetes way.
 
-This product brings the wold of [shalm](https://github.com/kramerul/shalm) to Cloud Foundry.
+This product brings the wold of [shalm](https://github.com/wonderix/shalm) to Cloud Foundry.
 
 
 ## Features
 
-* Supports everything provided by [shalm](https://github.com/kramerul/shalm)
+* Supports everything provided by [shalm](https://github.com/wonderix/shalm)
 * Allows installation of Cloud Foundry artifacts in a k8s way
 
 
