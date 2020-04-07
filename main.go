@@ -7,6 +7,7 @@ import (
 	"path"
 	"time"
 
+	"github.com/k14s/ytt/pkg/yttlibrary"
 	"github.com/pkg/errors"
 	"github.com/spf13/pflag"
 	"github.com/wonderix/cfpkg/pkg/cfpkg"
@@ -19,31 +20,52 @@ import (
 var cfConfig string
 var skipK8s bool
 
-func cfExtension(thread *starlark.Thread, module string) (starlark.StringDict, error) {
-	exports := starlark.NewDict(2)
-	exports.SetKey(starlark.String("write"), starlark.NewBuiltin("write", func(thread *starlark.Thread, fn *starlark.Builtin, args starlark.Tuple, kwargs []starlark.Tuple) (starlark.Value, error) {
+func iacModule() (starlark.StringDict, error) {
+	state := starlark.NewDict(2)
+	stateDir := os.Getenv("IAC_DEPLOYMENT_STATE_DIR")
+	state.SetKey(starlark.String("write"), starlark.NewBuiltin("write", func(thread *starlark.Thread, fn *starlark.Builtin, args starlark.Tuple, kwargs []starlark.Tuple) (starlark.Value, error) {
 		var value starlark.Value
 		if err := starlark.UnpackArgs("write", args, kwargs, "value", &value); err != nil {
 			return starlark.None, err
 		}
-		return starlark.None, shalm.WriteYamlFile(path.Join(os.Getenv("IAC_DEPLOYMENT_GEN_DIR"), "exports.yml"), value)
+		os.MkdirAll(stateDir, 0755)
+		return starlark.None, shalm.WriteYamlFile(path.Join(stateDir, "cfpkg.yml"), value)
 	}))
-	exports.SetKey(starlark.String("read"), starlark.NewBuiltin("read", func(thread *starlark.Thread, fn *starlark.Builtin, args starlark.Tuple, kwargs []starlark.Tuple) (starlark.Value, error) {
-		content, err := ioutil.ReadFile(path.Join(os.Getenv("IAC_DEPLOYMENT_GEN_DIR"), "exports.yml"))
+	state.SetKey(starlark.String("read"), starlark.NewBuiltin("read", func(thread *starlark.Thread, fn *starlark.Builtin, args starlark.Tuple, kwargs []starlark.Tuple) (starlark.Value, error) {
+		dict, err := shalm.ReadYamlFile(path.Join(stateDir, "cfpkg.yml"))
 		if err != nil {
 			return starlark.None, err
 		}
-		return starlark.String(string(content)), nil
+		return shalm.UnwrapDict(dict), nil
 	}))
+	content, err := shalm.ReadYamlFile(os.Getenv("IAC_DEPLOYMENT_CONTEXT_FILE"))
+	if err != nil {
+		return nil, err
+	}
+	context, err := content.(starlark.HasAttrs).Attr("context")
+	if err != nil {
+		return nil, err
+	}
+	return starlark.StringDict{
+		"context": context,
+		"state":   shalm.WrapDict(state),
+	}, nil
+
+}
+func cfExtension(thread *starlark.Thread, module string) (starlark.StringDict, error) {
 	switch module {
 	case "@cf:cf":
 		return starlark.StringDict{
 			"cf": starlark.NewBuiltin("cf", cfpkg.MakeCF),
-			"context": starlark.NewBuiltin("context", func(thread *starlark.Thread, fn *starlark.Builtin, args starlark.Tuple, kwargs []starlark.Tuple) (starlark.Value, error) {
-				return shalm.ReadYamlFile(os.Getenv("IAC_DEPLOYMENT_CONTEXT_FILE"))
-			}),
-			"exports": exports,
 		}, nil
+	case "@iac:iac":
+		return iacModule()
+	case "@ytt:yaml":
+		return yttlibrary.YAMLAPI, nil
+	case "@ytt:base64":
+		return yttlibrary.Base64API, nil
+	case "@ytt:json":
+		return yttlibrary.JSONAPI, nil
 	}
 	return nil, fmt.Errorf("Unknown module '%s'", module)
 }

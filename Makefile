@@ -15,7 +15,7 @@ else
 GOBIN=$(shell go env GOBIN)
 endif
 
-GO_FILES:=$(shell git ls-files '*.go')
+GO_FILES:=$(shell git ls-files '*.go') go.mod go.sum
 
 all: cfpkg
 
@@ -47,11 +47,11 @@ cfpkg :: bin/cfpkg
 
 VERSION_FLAGS := "-X github.com/wonderix/cfpkg/pkg/cfpkg.version=${VERSION}"
 
-bin/cfpkg: $(GO_FILES) go.sum
+bin/cfpkg: $(GO_FILES)
 	mkdir -p bin
 	CGO_ENABLED=0 GOARCH=amd64 GO111MODULE=on go build -ldflags ${VERSION_FLAGS} -o bin/cfpkg . 
 
-bin/linux/cfpkg: $(GO_FILES) go.sum
+bin/linux/cfpkg: $(GO_FILES) 
 	mkdir -p bin/linux
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=on go build -ldflags ${VERSION_FLAGS} -o bin/linux/cfpkg . 
 

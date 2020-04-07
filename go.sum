@@ -388,10 +388,8 @@ github.com/ugorji/go v1.1.4/go.mod h1:uQMGLiO92mf5W77hV/PUCpI3pbzQx3CRekS0kk+RGr
 github.com/ugorji/go/codec v0.0.0-20181204163529-d75b2dcb6bc8/go.mod h1:VFNgLljTbGfSG7qAOspJ7OScBnGdDN/yBr0sguwnwf0=
 github.com/urfave/cli v1.20.0/go.mod h1:70zkFmudgCuE/ngEzBv17Jvp/497gISqfk5gWijbERA=
 github.com/vektah/gqlparser v1.1.2/go.mod h1:1ycwN7Ij5njmMkPPAOaRFY4rET2Enx7IkVv3vaXspKw=
-github.com/wonderix/shalm v0.5.1 h1:zDHzw5nL6VWoihu6uHxhKikgvM2AzflUBgF7v0pPwEc=
-github.com/wonderix/shalm v0.5.1/go.mod h1:Qea/fnCC0Q6SXqL9tjvNwG0AHKmog7SRavCQ6JQy0Lc=
-github.com/wonderix/shalm v0.5.2-0.20200406180619-66e37ec721a1 h1:PS7np4jWIO28/8/rtZM8+fifb3CDD4Vb7cXlklqzStU=
-github.com/wonderix/shalm v0.5.2-0.20200406180619-66e37ec721a1/go.mod h1:Qea/fnCC0Q6SXqL9tjvNwG0AHKmog7SRavCQ6JQy0Lc=
+github.com/wonderix/shalm v0.5.3 h1:1P5/ShylKAWr148itTTuXyKhCVMmTYqCOnqEfQDeuQc=
+github.com/wonderix/shalm v0.5.3/go.mod h1:Qea/fnCC0Q6SXqL9tjvNwG0AHKmog7SRavCQ6JQy0Lc=
 github.com/xiang90/probing v0.0.0-20190116061207-43a291ad63a2/go.mod h1:UETIi67q53MR2AWcXfiuqkDkRtnGDLqkBTpCHuJHxtU=
 github.com/xordataexchange/crypt v0.0.3-0.20170626215501-b2862e3d0a77/go.mod h1:aYKd//L2LvnjZzWKhF00oedf4jCCReLcmhLdhm1A27Q=
 go.etcd.io/bbolt v1.3.2/go.mod h1:IbVyRI1SCnLcuJnV2u8VeU0CEYM7e686BmAb1XKL+uU=
