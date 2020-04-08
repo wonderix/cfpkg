@@ -1,6 +1,7 @@
 package cfpkg
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"strings"
@@ -116,6 +117,12 @@ func (c *CF) ForSubChart(namespace string, app string, version semver.Version) s
 		resources:    c.resources,
 		uaaResources: c.uaaResources,
 	}
+}
+
+// WithContext -
+func (c *CF) WithContext(ctx context.Context) shalm.K8s {
+	c.k8s = c.k8s.WithContext(ctx)
+	return c
 }
 
 // Inspect -
