@@ -46,7 +46,7 @@ vet:
 
 cfpkg :: bin/cfpkg
 
-VERSION_FLAGS := "-X github.com/wonderix/cfpkg/pkg/cfpkg.version=${VERSION}"
+VERSION_FLAGS := "-X github.com/wonderix/shalm/pkg/shalm.version=${VERSION}"
 
 bin/cfpkg: $(GO_FILES)
 	mkdir -p bin
