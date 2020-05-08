@@ -4,6 +4,12 @@ Install Cloud Foundry artifacts the kubernetes way.
 
 This product brings the wold of [shalm](https://github.com/wonderix/shalm) to Cloud Foundry.
 
+## Installation
+
+```bash
+brew tap wonderix/tap
+brew install cfpkg
+```
 
 ## Features
 

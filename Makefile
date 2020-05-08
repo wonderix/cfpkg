@@ -43,6 +43,7 @@ fmt:
 vet:
 	go vet ./...
 
+
 cfpkg :: bin/cfpkg
 
 VERSION_FLAGS := "-X github.com/wonderix/cfpkg/pkg/cfpkg.version=${VERSION}"
@@ -51,14 +52,28 @@ bin/cfpkg: $(GO_FILES)
 	mkdir -p bin
 	CGO_ENABLED=0 GOARCH=amd64 GO111MODULE=on go build -ldflags ${VERSION_FLAGS} -o bin/cfpkg . 
 
-bin/linux/cfpkg: $(GO_FILES) 
-	mkdir -p bin/linux
-	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=on go build -ldflags ${VERSION_FLAGS} -o bin/linux/cfpkg . 
+docker-context/cfpkg:  bin/linux/cfpkg
+	mkdir -p docker-context/
+	cp bin/linux/cfpkg docker-context/cfpkg
 
-binaries:
-	mkdir -p bin
-	cd bin; \
-	for GOOS in linux darwin windows; do \
-	  CGO_ENABLED=0 GOOS=$$GOOS GOARCH=amd64 GO111MODULE=on go build -ldflags ${VERSION_FLAGS} -o cfpkg ..; \
-		tar czf cfpkg-binary-$$GOOS.tgz cfpkg; \
-	done
+define BUILD_BIN
+bin/$(1)/cfpkg: $(GO_FILES)  go.sum
+	mkdir -p bin/$(1)
+	CGO_ENABLED=0 GOOS=$(1) GOARCH=amd64 GO111MODULE=on go build -ldflags ${VERSION_FLAGS} -o bin/$(1)/cfpkg .
+bin/cfpkg-binary-$(1).tgz: bin/$(1)/cfpkg
+	cd bin/$(1) &&  tar czf ../cfpkg-binary-$(1).tgz cfpkg
+endef
+
+$(foreach i,linux darwin windows,$(eval $(call BUILD_BIN,$(i))))
+
+binaries: $(foreach i,linux darwin windows,bin/cfpkg-binary-$(i).tgz)
+
+formula: homebrew-tap/cfpkg.rb
+
+homebrew-tap/cfpkg.rb: bin/cfpkg-binary-darwin.tgz bin/cfpkg-binary-linux.tgz
+	@mkdir -p homebrew-tap
+	@sed  \
+	-e "s/{{sha256-darwin}}/$$(shasum -b -a 256 bin/cfpkg-binary-darwin.tgz  | awk '{print $$1}')/g" \
+	-e "s/{{sha256-linux}}/$$(shasum -b -a 256 bin/cfpkg-binary-linux.tgz  | awk '{print $$1}')/g" \
+	-e "s/{{version}}/$(VERSION)/g" homebrew-formula.rb \
+	> homebrew-tap/cfpkg.rb

@@ -103,17 +103,22 @@ func (c *CF) Get(kind string, name string, options *shalm.K8sOptions) (*shalm.Ob
 	return c.k8s.Get(kind, name, options)
 }
 
+// List -
+func (c *CF) List(kind string, options *shalm.K8sOptions) (*shalm.Object, error) {
+	return c.k8s.List(kind, options)
+}
+
 // IsNotExist -
 func (c *CF) IsNotExist(err error) bool {
 	return c.k8s.IsNotExist(err)
 }
 
 // ForSubChart -
-func (c *CF) ForSubChart(namespace string, app string, version semver.Version) shalm.K8s {
+func (c *CF) ForSubChart(namespace string, app string, version semver.Version, children int) shalm.K8s {
 	return &CF{
 		client:       c.client,
 		uaaClient:    c.uaaClient,
-		k8s:          c.k8s.ForSubChart(namespace, app, version),
+		k8s:          c.k8s.ForSubChart(namespace, app, version, children),
 		resources:    c.resources,
 		uaaResources: c.uaaResources,
 	}
