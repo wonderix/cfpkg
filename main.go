@@ -7,13 +7,13 @@ import (
 	"path"
 	"time"
 
+	"github.com/k14s/starlark-go/starlark"
 	"github.com/k14s/ytt/pkg/yttlibrary"
 	"github.com/pkg/errors"
 	"github.com/spf13/pflag"
 	"github.com/wonderix/cfpkg/pkg/cfpkg"
 	"github.com/wonderix/shalm/cmd"
 	"github.com/wonderix/shalm/pkg/shalm"
-	"go.starlark.net/starlark"
 	"gopkg.in/yaml.v2"
 )
 

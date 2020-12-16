@@ -7,7 +7,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/blang/semver"
+	"github.com/Masterminds/semver/v3"
+	"k8s.io/apimachinery/pkg/types"
+
 	"github.com/cloudfoundry-community/go-cfclient"
 	"github.com/cloudfoundry-community/go-uaa"
 	"github.com/wonderix/shalm/pkg/shalm"
@@ -104,8 +106,8 @@ func (c *CF) Get(kind string, name string, options *shalm.K8sOptions) (*shalm.Ob
 }
 
 // List -
-func (c *CF) List(kind string, options *shalm.K8sOptions) (*shalm.Object, error) {
-	return c.k8s.List(kind, options)
+func (c *CF) List(kind string, options *shalm.K8sOptions, listOptions *shalm.ListOptions) (*shalm.Object, error) {
+	return c.k8s.List(kind, options, listOptions)
 }
 
 // IsNotExist -
@@ -114,7 +116,7 @@ func (c *CF) IsNotExist(err error) bool {
 }
 
 // ForSubChart -
-func (c *CF) ForSubChart(namespace string, app string, version semver.Version, children int) shalm.K8s {
+func (c *CF) ForSubChart(namespace string, app string, version *semver.Version, children int) shalm.K8s {
 	return &CF{
 		client:       c.client,
 		uaaClient:    c.uaaClient,
@@ -210,6 +212,18 @@ func (c *CF) ForConfig(config string) (shalm.K8s, error) {
 // Progress -
 func (c *CF) Progress(progress int) {
 	c.k8s.Progress(progress)
+}
+
+func (c *CF) Patch(kind string, name string, pt types.PatchType, patch string, options *shalm.K8sOptions) (*shalm.Object, error) {
+	return c.k8s.Patch(kind, name, pt, patch, options)
+}
+
+func (c *CF) CreateOrUpdate(obj *shalm.Object, mutate func(obj *shalm.Object) error, options *shalm.K8sOptions) (*shalm.Object, error) {
+	return c.k8s.CreateOrUpdate(obj, mutate, options)
+}
+
+func (c *CF) DeleteByName(kind string, name string, options *shalm.K8sOptions) error {
+	return c.k8s.DeleteByName(kind, name, options)
 }
 
 // Tool -
